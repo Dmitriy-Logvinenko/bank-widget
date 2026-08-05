@@ -18,3 +18,14 @@ def mask_account_card(user_number: str) -> str:
     else:
         return 'Вы ничего не ввели.'
     return ' '.join(new_list)
+
+
+def get_date(user_date: str) -> str:
+    new_date = user_date[:10].split('-')
+    reversed_date = new_date[::-1]
+    return '.'.join(reversed_date)
+
+
+if __name__ == '__main__':
+    print(mask_account_card(input()))
+    print(get_date(input()))
