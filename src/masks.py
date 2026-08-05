@@ -1,3 +1,4 @@
+# Функция скрытия номера карты
 def get_mask_card_number(card_number: str) -> str:
     """Возвращает скрытый номер карты."""
     if card_number.isdigit() and len(card_number) == 16:
@@ -8,6 +9,7 @@ def get_mask_card_number(card_number: str) -> str:
         return "Номер карты должен содержать 16 цифр без пробелов."
 
 
+# Функция скрытия номера счёта
 def get_mask_account(account_number: str) -> str:
     """Возвращает скрытый номер счёта."""
     if not account_number.isdigit():

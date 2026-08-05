@@ -1,8 +1,9 @@
 import src.masks as masks
 
 
+# Функция обработки данных
 def mask_account_card(user_number: str) -> str:
-    """Обрабатывает информацию о картах и счетах"""
+    """Возвращает скрытую информацию о картах и счетах"""
     new_list = user_number.split()
 
     if user_number:
@@ -20,6 +21,7 @@ def mask_account_card(user_number: str) -> str:
     return ' '.join(new_list)
 
 
+# Функция обработки дат
 def get_date(user_date: str) -> str:
     new_date = user_date[:10].split('-')
     reversed_date = new_date[::-1]
