@@ -7,10 +7,14 @@
 ## Установка:
 
 1. Клонируйте репозиторий:
-'''
-git@github.com:Dmitriy-Logvinenko/bank-widget.git
-'''
-2. Установите зависимости:
 ```
-pip install -r requirements.txt
+git@github.com:Dmitriy-Logvinenko/bank-widget.git
+```
+
+## Использование:
+
+1. Откройте свой терминал.
+2. Запустите проект с помощью команды:
+```
+python src/processing.py
 ```
