@@ -8,7 +8,11 @@
 
 1. Клонируйте репозиторий:
 ```
-git@github.com:Dmitriy-Logvinenko/bank-widget.git
+git clone git@github.com:Dmitriy-Logvinenko/bank-widget.git
+```
+2. Установите зависимости:
+```
+pip install -r requirements.txt
 ```
 
 ## Использование:
