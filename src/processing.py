@@ -22,7 +22,7 @@ def filter_by_state(user_list: list[dict[str, Any]], state: str = 'EXECUTED') ->
 
 def sort_by_date(user_list: list[dict[str, Any]], is_sorted: bool = True) -> list[dict[str, Any]]:
     """
-    Принимает список словарей  данными о банковских операциях и фильтрует их по указанному направлению.
+    Принимает список словарей данными о банковских операциях и фильтрует их по указанному направлению.
     :param user_list: список словарей, содержащих данные о банковских операциях.
     :type user_list: list[dict[str, Any]]
     :param is_sorted: направление, по которому фильтруются операции, по умолчанию 'True'.
