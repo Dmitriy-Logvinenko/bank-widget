@@ -6,7 +6,7 @@ def filter_by_state(user_list: list[dict], state: str = 'EXECUTED') -> list[dict
         if item['state'] == state:
             new_list.append(item)
 
-    return list(filter(lambda x: x['state'] == state, new_list))
+    return new_list
 
 
 def sort_by_date(user_list: list[dict], sorter: bool = True) -> list[dict]:
