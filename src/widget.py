@@ -23,6 +23,9 @@ def mask_account_card(user_number: str) -> str:
 
 # Функция обработки дат
 def get_date(user_date: str) -> str:
+    """
+    Принимает данные о дате и времени. Возвращает данные о дате в сокращённом виде.
+    """
     new_date = user_date[:10].split('-')
     reversed_date = new_date[::-1]
     return '.'.join(reversed_date)
