@@ -1,13 +1,20 @@
-import src.widget as mask
+import pytest
 
-# Тесты функции обработки
-print(mask.mask_account_card("Maestro 1596837868705199"))
-print(mask.mask_account_card("Счет 64686473678894779589"))
-print(mask.mask_account_card("MasterCard 7158300734726758"))
-print(mask.mask_account_card("Счет 35383033474447895560"))
-print(mask.mask_account_card("Visa Classic 6831982476737658"))
-print(mask.mask_account_card("Visa Platinum 8990922113665229"))
-print(mask.mask_account_card("Visa Gold 5999414228426353"))
-print(mask.mask_account_card("Счет 73654108430135874305"))
-# Тест функции обработки дат
-print(mask.get_date("2024-03-11T02:26:18.671407"))
+from src.widget import mask_account_card
+
+
+@pytest.mark.parametrize("user_number, expected", [
+    ("Visa Platinum 7000792289606361", "Visa Platinum 7000 79** **** 6361"),
+    ("Maestro 1596837868705199", "Maestro 1596 83** **** 5199"),
+    ("Счет 73654108430135874305", "Счет **4305"),
+])
+def test_mask_account_card(user_number: str, expected: str):
+    assert mask_account_card(user_number) == expected
+
+
+def test_mask_account_card_empty():
+    assert mask_account_card("") == "Вы ничего не ввели."
+
+
+def test_mask_account_card_correct():
+    assert mask_account_card("1596837868705199") == "Некорректно введены данные."
