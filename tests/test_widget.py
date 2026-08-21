@@ -1,6 +1,6 @@
 import pytest
 
-from src.widget import mask_account_card
+from src.widget import mask_account_card, get_date
 
 
 @pytest.mark.parametrize("user_number, expected", [
@@ -18,3 +18,7 @@ def test_mask_account_card_empty():
 
 def test_mask_account_card_correct():
     assert mask_account_card("1596837868705199") == "Некорректно введены данные."
+
+
+def test_get_date(user_date):
+    assert get_date(user_date) == "11.03.2024"
