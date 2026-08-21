@@ -1,5 +1,6 @@
 from typing import Any
 
+
 def filter_by_state(user_list: list[dict[str, Any]], state: str = 'EXECUTED') -> list[dict[str, Any]]:
     """
     Принимает список словарей с данными о банковских операциях и фильтрует их по указанному состоянию.
