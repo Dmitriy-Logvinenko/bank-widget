@@ -29,3 +29,20 @@ def transaction_descriptions(transactions: list[dict]) -> Any:
     while True:
         for transaction in transactions:
             yield transaction["description"]
+
+
+def card_number_generator(start: int, final: int) -> Any:
+    """
+    Генерирует номера карт по диапазону номеров
+    :param start: Начальное значение диапазона
+    :type start: int
+    :param final: Конечное значение диапазона
+    :type final: int
+    :return: Номера карт по диапазону
+    :rtype: Any
+    """
+    for i in range(start, final + 1):
+        new_card_number = f"{i:016}"
+        yield " ".join([new_card_number[i: i + 4] for i in range(0, 16, 4)])
+        if new_card_number == "9999 9999 9999 9999":
+            break
