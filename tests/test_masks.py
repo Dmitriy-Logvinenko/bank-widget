@@ -1,6 +1,6 @@
 import pytest
 
-from src.masks import get_mask_card_number, get_mask_account
+from src.masks import get_mask_account, get_mask_card_number
 
 
 @pytest.mark.parametrize("card_number, expected", [
@@ -8,15 +8,15 @@ from src.masks import get_mask_card_number, get_mask_account
     ("1596837868705199", "1596 83** **** 5199"),
     ("6831982476737658", "6831 98** **** 7658")
 ])
-def test_get_mask_card_number(card_number: str, expected: str):
+def test_get_mask_card_number(card_number: str, expected: str) -> None:
     assert get_mask_card_number(card_number) == expected
 
 
-def test_get_card_number_len(card_number: str):
+def test_get_mask_card_number_len(card_number: str) -> None:
     assert get_mask_card_number(card_number + '1') == "Номер карты должен содержать 16 цифр без пробелов."
 
 
-def test_get_card_number_correct():
+def test_get_mask_card_number_correct() -> None:
     assert get_mask_card_number('Номер карты') == "Номер карты должен содержать 16 цифр без пробелов."
 
 
@@ -25,13 +25,13 @@ def test_get_card_number_correct():
     ("64686473678894779589", "**9589"),
     ("35383033474447895560", "**5560")
 ])
-def test_get_mask_account(account_number: str, expected: str):
+def test_get_mask_account(account_number: str, expected: str) -> None:
     assert get_mask_account(account_number) == expected
 
 
-def test_get_mask_account_no_isdigit(account_number):
+def test_get_mask_account_no_isdigit(account_number: str) -> None:
     assert get_mask_account("Номер счёта") == "Номер счёта должен содержать только цифры без пробелов."
 
 
-def test_get_mask_account_len():
+def test_get_mask_account_len() -> None:
     assert get_mask_account("345") == "Номер счёта не может быть короче четырёх символов."
