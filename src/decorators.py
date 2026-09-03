@@ -1,11 +1,22 @@
 import time
 from functools import wraps
+from typing import Optional
+
+from mypy.types import Any
 
 
-def log(filename=None):
-    def wrapper(func):
+def log(filename: Optional[str]=None) -> Any:
+    """
+    Автоматически логирует начало и конец выполнения функции, а также ее результаты или возникшие ошибки.
+    :param filename: Аргумент, который определяет, куда будут записываться логи (по умолчанию в консоль)
+    :type filename: str
+    :return: Время работы функции, а также её результат в случае успешного выполнения,
+    или информацию о возникшей ошибке в консоль или указанный файл.
+    :rtype: None
+    """
+    def wrapper(func: Any) -> Any:
         @wraps(func)
-        def inner(*args, **kwargs):
+        def inner(*args: Any, **kwargs: Any) -> Any:
             start = time.perf_counter()
             error = None
             result = None
