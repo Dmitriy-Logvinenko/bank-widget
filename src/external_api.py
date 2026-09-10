@@ -9,6 +9,13 @@ API_KEY = os.getenv('API_KEY')
 
 
 def amount_transaction(transaction: dict) -> float:
+    """
+    Возвращает сумму транзакции в рублях.
+    :param transaction: Словарь с данными о финансовых транзакциях.
+    :type transaction: dict
+    :return: Сумма транзакции в рублях.
+    :rtype: float
+    """
     for _ in transaction:
         amount = transaction['operationAmount']['amount']
         url = f'https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=USD&amount={amount}'
