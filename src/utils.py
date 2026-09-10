@@ -11,8 +11,12 @@ def financial_transaction_data(filename: str) -> list:
     """
     try:
         with open('data/' + filename, 'r', encoding='utf-8') as f:
-            if type(f) != list:
-                return []
-            return json.load(f)
+            data = json.load(f)
+
+            if not isinstance(data, list):
+                data = []
+
+            return data
+
     except (json.JSONDecodeError, FileNotFoundError):
         return []
