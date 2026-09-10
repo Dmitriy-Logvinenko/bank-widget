@@ -14,5 +14,5 @@ def financial_transaction_data(filename: str) -> list:
             if type(f) != list:
                 return []
             return json.load(f)
-    except FileNotFoundError, json.JSONDecodeError:
+    except (json.JSONDecodeError, FileNotFoundError):
         return []

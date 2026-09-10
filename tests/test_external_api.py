@@ -7,8 +7,8 @@ from src.external_api import amount_transaction
 
 @patch("requests.get")
 def test_amount_transaction(mock_get: Any, transaction: dict) -> None:
-    mock_get.return_value.json.return_value = {"result": 100}
-    assert amount_transaction(transaction) == 100
+    mock_get.return_value.json.return_value = {"result": 100.00}
+    assert amount_transaction(transaction) == 100.00
 
 
 @patch("requests.get")

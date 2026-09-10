@@ -25,4 +25,4 @@ def amount_transaction(transaction: dict) -> float:
             response = requests.get(url, headers={"apikey": API_KEY})
             return round(response.json()["result"], 2)
 
-    return amount
+    return float(amount)
