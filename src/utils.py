@@ -1,12 +1,18 @@
 import json
 
-from mypy.types import Any
 
-
-def financial_transaction_data(filename: str) -> Any:
-    """Возвращает данные о финансовых транзакциях"""
+def financial_transaction_data(filename: str) -> list:
+    """
+    Возвращает данные о финансовых транзакциях.
+    :param filename: Имя файла
+    :type filename: str
+    :return: список с данными о финансовых транзакциях
+    :rtype: list
+    """
     try:
-        with open('data/' + filename, encoding='utf-8') as f:
-            return json.load(f) if f else []
-    except FileNotFoundError, json.decoder.JSONDecodeError:
+        with open('data/' + filename, 'r', encoding='utf-8') as f:
+            if type(f) != list:
+                return []
+            return json.load(f)
+    except FileNotFoundError, json.JSONDecodeError:
         return []
