@@ -16,20 +16,16 @@ def amount_transaction(transaction: dict) -> float:
     :return: Сумма транзакции в рублях.
     :rtype: float
     """
-    for _ in transaction:
-        amount = transaction['operationAmount']['amount']
-        url_usd = f'https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=USD&amount={amount}'
-        url_eur = f'https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=EUR&amount={amount}'
+    amount = transaction['operationAmount']['amount']
+    url_usd = f'https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=USD&amount={amount}'
+    url_eur = f'https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=EUR&amount={amount}'
 
+    for _ in transaction:
         if transaction['operationAmount']['currency']['code'] == 'USD':
             response = requests.get(url_usd, headers={'apikey': API_KEY})
-            result = response.json()
-            result = round(result['result'], 2)
+            return round(response.json()['result'], 2)
         elif transaction['operationAmount']['currency']['code'] == 'EUR':
             response = requests.get(url_eur, headers={'apikey': API_KEY})
-            result = response.json()
-            result = round(result['result'], 2)
-        else:
-            result = amount
+            return round(response.json()['result'], 2)
 
-    return result
+    return amount
