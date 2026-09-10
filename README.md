@@ -44,6 +44,13 @@
 **card_number_generator** - функция для генерации номера карты.  
 Принимает начальное и конечное значение, и генерирует по ним номера карт.
 
+### Функции работы с библиотеками:
+
+**financial_transaction_data** - Функция возвращающая данные о финансовых операциях из
+указанного JSON-файла. Принимает JSON-файл и возвращает его содержимое.
+
+**amount_transaction** - Функция принимающая данные о транзакции, возвращающая её сумму,
+и конвертирующая сумму в рубли из другой валюты.
 
 ## Установка:
 
@@ -64,31 +71,37 @@ pip install -r requirements.txt
 1. Откройте свой терминал.
 2. Запустите проект с помощью одной из команд:
 
-```
-python src/decorators.py
+`python src/decorators.py`
 
-python src/generators.py
+`python src/external_api.py`
 
-python src/processing.py
+`python src/generators.py`
 
-python src/masks.py
+`python src/masks.py`
 
-python src/widget.py
-```
+`python src/processing.py`
+
+`python src/utils.py`
+
+`python src/widget.py`
 
 ## Тестирование:
 
-В файле `test_decorators.py` тестируется декоратор `log` с помощью таких тестов как:
+В модуле `test_decorators.py` тестируется декоратор `log` с помощью таких тестов как:
    - `test_log` - проверяет работу при успешном выполнении функции.
    - `test_zero_log` - проверяет возникновение ошибки при делении на ноль.
    - `test_log_incorrect` - проверяет ошибку при некорректно введённых данных.
 
-В файле `test_generators.py` проверяются такие тесты как:
+Модуль `test_external_api.py` содержит проверки:
+   - `test_amount_transaction` - проверяет с помощью `patch` и `mock_get` вывод заданного результата при конвертации.
+   - `test_amount_transaction_rus` - тестирует вывод заданного результата без конвертации.
+
+В модуле `test_generators.py` проверяются такие тесты как:
    - `test_filter_by_currency` - проверяет поочерёдный вывод транзакций.
    - `test_transaction_descriptions` - проверяет поочерёдный вывод описания транзакций.
    - `test_card_number_generator` - проверяет генерацию номеров карт.
 
-В файле `test_masks.py` содержатся проверки на сокрытие данных:
+В модуле `test_masks.py` содержатся проверки на сокрытие данных:
    1. Для функции `get_mask_card_number`:
       - `test_get_mask_card_number` - проверяет работу функции при различных вариантах ввода.
       - `test_get_mask_card_number_len` - тестирует работу при некорректной длине номера карты.
@@ -98,11 +111,15 @@ python src/widget.py
       - `test_get_mask_account_no_isdigit` - проверяет работу при некорректном вводе.
       - `test_get_mask_account_len` - тестирует функцию при малой длине ввода.
 
-В файле `test_processing.py` собраны следующие тесты:
+В модуле `test_processing.py` собраны следующие тесты:
    - `test_filter_by_state` - тестирует вывод данных при заданном значении.
    - `test_sort_by_date` - проверяет сортировку данных по заданному направлению.
 
-Файл `test_widget.py` хранит тесты:
+Модуль `test_utils.py`
+   - `test_financial_transaction_data` - с помощью `patch` проверяет вывод пустого словаря при отсутствии файла.
+   - `test_financial_transaction_data_with_mock` - делает ту же проверку, но с помощью `Mock`.
+
+Модуль `test_widget.py` хранит тесты:
    - `test_mask_account_card` - тестирует работу функции `mask_account_card` при разных данных.
    - `test_mask_account_card_empty` - проверяет функцию на пустой ввод.
    - `test_mask_account_card_correct` - проверяет на корректность ввода.
@@ -110,7 +127,8 @@ python src/widget.py
 
 ### Изменения:
 
-1. Добавлен модуль `decorators.py` содержащий декоратор `log` с функциями логирования и сохранения результата
-работы функции или возникшей ошибки в указанный файл или консоль.
-2. Добавлен файл `test_decorators.py` для тестирования вышеуказанного декоратора.
+1. Добавлены модули `external_api.py` содержащий функцию `amount_transaction` возвращающую сумму транзакции
+и конвертирующую её в рубли при необходимости, и `utils.py` имеющий функцию `financial_transaction_data`
+возвращающую данные о финансовых транзакциях из JSON-файла.
+2. Добавлены тестирующие модули `test_external_api.py` и `test_utils.py` для тестирования вышеуказанных функций.
 3. Отредактирован файл `README.md`, добавлено описание, в том числе для тестирования.
