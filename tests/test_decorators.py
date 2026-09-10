@@ -32,4 +32,4 @@ def test_log_incorrect(capsys: CaptureFixture[str]) -> None:
 
     add("1", 2)
     captured = capsys.readouterr()
-    assert 'add TypeError: can only concatenate str (not "int") to str. Inputs: (\'1\', 2), {}\n' in captured.out
+    assert "add TypeError: can only concatenate str (not \"int\") to str. Inputs: ('1', 2), {}\n" in captured.out
