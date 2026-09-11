@@ -3,28 +3,30 @@ import pytest
 from src.masks import get_mask_account, get_mask_card_number
 
 
-@pytest.mark.parametrize("card_number, expected", [
-    ("7000792289606361", "7000 79** **** 6361"),
-    ("1596837868705199", "1596 83** **** 5199"),
-    ("6831982476737658", "6831 98** **** 7658")
-])
+@pytest.mark.parametrize(
+    "card_number, expected",
+    [
+        ("7000792289606361", "7000 79** **** 6361"),
+        ("1596837868705199", "1596 83** **** 5199"),
+        ("6831982476737658", "6831 98** **** 7658"),
+    ],
+)
 def test_get_mask_card_number(card_number: str, expected: str) -> None:
     assert get_mask_card_number(card_number) == expected
 
 
 def test_get_mask_card_number_len(card_number: str) -> None:
-    assert get_mask_card_number(card_number + '1') == "Номер карты должен содержать 16 цифр без пробелов."
+    assert get_mask_card_number(card_number + "1") == "Номер карты должен содержать 16 цифр без пробелов."
 
 
 def test_get_mask_card_number_correct() -> None:
-    assert get_mask_card_number('Номер карты') == "Номер карты должен содержать 16 цифр без пробелов."
+    assert get_mask_card_number("Номер карты") == "Номер карты должен содержать 16 цифр без пробелов."
 
 
-@pytest.mark.parametrize("account_number, expected", [
-    ("73654108430135874305", "**4305"),
-    ("64686473678894779589", "**9589"),
-    ("35383033474447895560", "**5560")
-])
+@pytest.mark.parametrize(
+    "account_number, expected",
+    [("73654108430135874305", "**4305"), ("64686473678894779589", "**9589"), ("35383033474447895560", "**5560")],
+)
 def test_get_mask_account(account_number: str, expected: str) -> None:
     assert get_mask_account(account_number) == expected
 
