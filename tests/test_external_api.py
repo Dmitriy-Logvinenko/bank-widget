@@ -13,8 +13,8 @@ def test_amount_transaction(mock_get: Any, transaction: dict) -> None:
 
 @patch("requests.get")
 def test_amount_transaction_rus(mock_get: Any) -> None:
-    mock_get.return_value.json.return_value = "221.37"
+    mock_get.return_value.json.return_value = {"result": 221.37}
     assert (
         amount_transaction({"operationAmount": {"amount": "221.37", "currency": {"name": "RUS", "code": "RUS"}}})
-        == "221.37"
+        == 221.37
     )
