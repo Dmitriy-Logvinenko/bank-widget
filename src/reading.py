@@ -20,7 +20,7 @@ def reading_csv(file_path: str) -> list[dict]:
         return csv_list
 
 
-def reading_xlsx(file_path: str) -> list[dict]:
+def reading_excel(file_path: str) -> list[dict]:
     """
     Считывает данные из excel-файла и возвращает их как список словарей
     :param file_path: Путь до xlsx-файла
