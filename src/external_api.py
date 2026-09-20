@@ -23,6 +23,6 @@ def amount_transaction(transaction: dict) -> float:
     for _ in transaction:
         if currency != "RUB":
             response = requests.get(url, headers={"apikey": API_KEY})
-            return float(round(response.json()["result"], 2))
+            return round(float(response.json()["result"]), 2)
 
     return float(amount)
