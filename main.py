@@ -1,7 +1,9 @@
-import src.utils, src.reading, src.processing
+import src.processing
+import src.reading
+import src.utils
 
 
-def main():
+def main() -> None:
     print('Программа: Привет! Добро пожаловать в программу работы'
           'с банковскими транзакциями.\n'
           'Выберите необходимый пункт меню:\n'
@@ -50,14 +52,14 @@ def main():
 
         if user_sort_status.lower() in ['по возрастанию', 'по убыванию']:
             if user_sort_status.lower() == 'по возрастанию':
-                user_sorted = src.processing.sort_by_date(user_data, False)
+                user_sorted = src.processing.sort_by_date(user_status, False)
             elif user_sort_status.lower() == 'по убыванию':
-                user_sorted = src.processing.sort_by_date(user_data)
+                user_sorted = src.processing.sort_by_date(user_status)
         else:
-            user_sorted = user_data
+            user_sorted = user_status
             print('Статус введён некорректно. Сортировка отменена.')
     else:
-        user_sorted = user_data
+        user_sorted = user_status
 
     print('Выводить только рублевые транзакции? Да/Нет')
 
