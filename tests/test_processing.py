@@ -1,4 +1,4 @@
-from src.processing import filter_by_state, sort_by_date, process_bank_search
+from src.processing import filter_by_state, sort_by_date, process_bank_search, process_bank_operations
 
 
 def test_filter_by_state(user_list: list[dict], state: str) -> None:
@@ -38,3 +38,7 @@ def test_process_bank_search(transactions: list[dict]) -> None:
             "to": "Счет 14211924144426031657",
         }
     ]
+
+
+def test_process_bank_operations(transactions: list[dict]) -> None:
+    assert process_bank_operations(transactions, ['Перевод организации']) == {'Перевод организации': 2}
