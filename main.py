@@ -85,6 +85,9 @@ def main():
     print(f'Всего банковских операций в выборке: {len(user_search)}')
     print(user_search)
 
+    if not user_search or user_search == []:
+        print('Не найдено ни одной транзакции, подходящей под ваши условия фильтрации.')
+
 
 if __name__ == '__main__':
     main()
