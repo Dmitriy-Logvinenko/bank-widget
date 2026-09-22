@@ -3,11 +3,11 @@ import src.utils, src.reading, src.processing
 
 def main():
     print('Программа: Привет! Добро пожаловать в программу работы'
-    'с банковскими транзакциями.\n'
-    'Выберите необходимый пункт меню:\n'
-    '1. Получить информацию о транзакциях из JSON-файла\n'
-    '2. Получить информацию о транзакциях из CSV-файла\n'
-    '3. Получить информацию о транзакциях из XLSX-файла')
+          'с банковскими транзакциями.\n'
+          'Выберите необходимый пункт меню:\n'
+          '1. Получить информацию о транзакциях из JSON-файла\n'
+          '2. Получить информацию о транзакциях из CSV-файла\n'
+          '3. Получить информацию о транзакциях из XLSX-файла')
 
     while True:
         user_option = input('Введите один из вариантов: 1, 2 или 3: ')
@@ -30,17 +30,60 @@ def main():
         if not user_option:
             print('Вы ничего не ввели.')
 
-
     print('\nВведите статус, по которому необходимо выполнить фильтрацию.\n'
-    'Доступные для фильтрации статусы: EXECUTED, CANCELED, PENDING')
+          'Доступные для фильтрации статусы: EXECUTED, CANCELED, PENDING')
 
     user_filter_status = input()
 
     if user_filter_status.upper() in ['EXECUTED', 'CANCELED', 'PENDING']:
         print(f'Операции отфильтрованы по статусу {user_filter_status.upper()}.')
-        user_state = src.processing.filter_by_state(user_data, user_filter_status.upper())
+        user_status = src.processing.filter_by_state(user_data, user_filter_status.upper())
     else:
         print(f'Статус операции "{user_filter_status}" недоступен.')
+
+    print('Отсортировать операции по дате? Да/Нет')
+
+    is_user_sort_status = input()
+    if is_user_sort_status.lower() == 'да':
+        print('Отсортировать по возрастанию или по убыванию?')
+        user_sort_status = input()
+
+        if user_sort_status.lower() in ['по возрастанию', 'по убыванию']:
+            if user_sort_status.lower() == 'по возрастанию':
+                user_sorted = src.processing.sort_by_date(user_data, False)
+            elif user_sort_status.lower() == 'по убыванию':
+                user_sorted = src.processing.sort_by_date(user_data)
+        else:
+            user_sorted = user_data
+            print('Статус введён некорректно. Сортировка отменена.')
+    else:
+        user_sorted = user_data
+
+    print('Выводить только рублевые транзакции? Да/Нет')
+
+    is_rub_status = input()
+    if is_rub_status.lower() == 'да':
+        rub_sorted = list()
+
+        for item in user_sorted:
+            if 'operationAmount' in item:
+                if item["operationAmount"]["currency"]["code"] == 'RUB':
+                    rub_sorted.append(item)
+    else:
+        rub_sorted = user_sorted
+
+    print('Отфильтровать список транзакций по определенному слову в описании? Да/Нет')
+
+    is_search_status = input()
+    if is_search_status.lower() == 'да':
+        user_search_word = input('Введите слово для фильтрации: ')
+        user_search = src.processing.process_bank_search(rub_sorted, user_search_word)
+    else:
+        user_search = rub_sorted
+
+    print('Распечатываю итоговый список транзакций...')
+    print(f'Всего банковских операций в выборке: {len(user_search)}')
+    print(user_search)
 
 
 if __name__ == '__main__':
