@@ -14,8 +14,9 @@ def filter_by_state(user_list: list[dict], state: str = 'EXECUTED') -> list[dict
     new_list = list()
 
     for item in user_list:
-        if item["state"] == state:
-            new_list.append(item)
+        if 'state' in item:
+            if item["state"] == state:
+                new_list.append(item)
 
     return new_list
 
