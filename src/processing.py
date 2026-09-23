@@ -1,5 +1,7 @@
 import re
 
+from collections import Counter
+
 
 def filter_by_state(user_list: list[dict], state: str = 'EXECUTED') -> list[dict]:
     """
@@ -77,19 +79,17 @@ def process_bank_operations(data: list[dict], categories: list) -> dict:
     operations = {}
 
     try:
-        for category in categories:
-            # Список вхождений отдельной категории
-            category_list = []
+        category_list = list()
 
-            for item in data:
-                if 'description' in item:
+        for item in data:
+            if 'description' in item:
+                for category in categories:
                     # Проверка на наличие категории
                     if re.search(category, item['description']):
                         # Запись категории в список
                         category_list.append(category)
 
-            # Подсчёт определённой категории
-            operations[category] = len(category_list)
+        operations = dict(Counter(category_list))
 
     except Exception as e:
         print(e)
